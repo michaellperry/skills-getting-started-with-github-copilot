@@ -6,7 +6,7 @@ from fastapi.testclient import TestClient
 from src import app as app_module
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def baseline_activities():
     return copy.deepcopy(app_module.activities)
 
