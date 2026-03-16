@@ -4,6 +4,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("signup-form");
   const messageDiv = document.getElementById("message");
 
+  // Observe success messages to keep the activities list in sync (e.g., after signup).
+  if (messageDiv && typeof MutationObserver !== "undefined") {
+    const messageObserver = new MutationObserver(() => {
+      const classList = messageDiv.classList;
+      if (classList.contains("success") && !classList.contains("hidden")) {
+        // Refresh activities when a visible success message is shown.
+        if (typeof fetchActivities === "function") {
+          fetchActivities();
+        }
+      }
+    });
+
+    messageObserver.observe(messageDiv, {
+      attributes: true,
+      attributeFilter: ["class"],
+      childList: true,
+      subtree: false,
+    });
+  }
+
   function escapeHtml(value) {
     return String(value)
       .replace(/&/g, "&amp;")
