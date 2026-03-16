@@ -101,6 +101,15 @@ def signup_for_activity(activity_name: str, email: str):
     # Get the specific activity
     activity = activities[activity_name]
 
+    # Enforce maximum capacity if defined
+    if "max_participants" in activity:
+        max_participants = activity["max_participants"]
+        if max_participants is not None and len(activity["participants"]) >= max_participants:
+            raise HTTPException(
+                status_code=400,
+                detail="Activity is full; no spots left",
+            )
+
     # Check if student is already signed up
     if email in activity["participants"]:
         raise HTTPException(status_code=400, detail="Student already signed up for this activity")
