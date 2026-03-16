@@ -110,7 +110,7 @@ section h3 {
   overflow-wrap: anywhere;
 }
 
-.remove-participant-btn {
+button.remove-participant-btn {
   width: 26px;
   height: 26px;
   border-radius: 50%;
@@ -127,7 +127,7 @@ section h3 {
   transition: transform 0.15s ease, background-color 0.2s ease;
 }
 
-.remove-participant-btn:hover {
+button.remove-participant-btn:hover {
   background-color: #ffe4e6;
   transform: scale(1.06);
 }
